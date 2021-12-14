@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,44 +18,22 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 }); */
 
-Route::get('/', function () {
-
-    return view('home');
-    
-})->name('home');
-
-Route::get('/login', function () {
-
-    return view('login');
-
-})->name('login');
-
 /* Route::get('/logout', function () {
 
     return view('logout');
 
 })->name('logout'); */
+Route::get('/login', 'LoginController')->name('login');
+Route::get('/add', 'AddController')->name('add')->middleware('auth');
+Route::post('/add', 'AddController@store')->name('add.store')->middleware('auth');
+Route::get('/detail', 'DetailController')->name('detail');
+Route::get('/modsong', 'ModSongController')->name('modsong')->middleware('auth');
+Route::get('/list', 'ListController')->name('list');
+Route::get('/', 'HomeController')->name('home');
 
-Route::get('/list', function () {
+Route::post('add', 'AddController@store');
+Route::delete('/delete/{id}', 'ListController@destroy')->name('destroy');
 
-    return view('list');
+Auth::routes();
 
-})->name('list');
-
-Route::get('/add', function () {
-
-    return view('add');
-
-})->name('add');
-
-Route::get('/detail', function () {
-
-    return view('detail');
-
-})->name('detail');
-
-Route::get('/modsong', function () {
-
-    return view('modsong');
-
-})->name('modsong');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

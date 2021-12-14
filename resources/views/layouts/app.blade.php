@@ -51,7 +51,7 @@
             </form>
         </nav>
         @yield('content')
-        <footer class="page-footer font-small blue">
+        <footer class="page-footer font-small blue" style="margin-top: 335px;">
 
             <!-- Copyright -->
             <div class="footer-copyright text-center py-3 bg-dark text-light">© 2021 Copyright:
